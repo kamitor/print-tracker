@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Print Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f1e8; --card:#fffdf8; --ink:#2b2418; --muted:#7a6d58; --line:#e3dac7;
+  --accent:#8a5a1f; --todo:#b9ad97; --printing:#c98a1b; --done:#3f7d4e; --failed:#b0413e;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16130e; --card:#211c15; --ink:#efe6d4; --muted:#a8997f; --line:#3a3226;
+    --accent:#d9a55a; --todo:#5c5242; --printing:#e0a33a; --done:#5fae73; --failed:#d9625e;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16130e; --card:#211c15; --ink:#efe6d4; --muted:#a8997f; --line:#3a3226;
+  --accent:#d9a55a; --todo:#5c5242; --printing:#e0a33a; --done:#5fae73; --failed:#d9625e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif}
+main{max-width:960px;margin:0 auto;padding:32px 16px 64px}
+h1,h2{font-family:Cinzel,Georgia,serif;margin:0}
+h1{font-size:30px;color:var(--accent)}
+.sub{color:var(--muted);margin:4px 0 24px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat b{display:block;font-size:24px;font-variant-numeric:tabular-nums}
+.stat span{color:var(--muted);font-size:13px}
+.bar{height:12px;border-radius:6px;background:var(--line);overflow:hidden;display:flex;margin:8px 0 6px}
+.bar i{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:13px;margin-bottom:28px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.settings{background:var(--card);border-left:3px solid var(--accent);padding:10px 14px;border-radius:6px;margin-bottom:28px;font-size:14px}
+h2{font-size:18px;margin:28px 0 10px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+h2 small{font-family:Inter,sans-serif;font-weight:500;color:var(--muted);font-size:13px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);font-size:14px}
+th{color:var(--muted);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600;color:#fff}
+.notes{color:var(--muted);font-size:13px}
+.hide-sm{}
+@media (max-width:600px){.hide-sm{display:none}th,td{padding:8px}}
+footer{margin-top:40px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<main id="app"><p>Loading…</p></main>
+<script>
+const COLORS={todo:'var(--todo)',printing:'var(--printing)',done:'var(--done)',failed:'var(--failed)'};
+const LABEL={todo:'To print',printing:'Printing',done:'Done',failed:'Failed / reprint'};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+fetch('parts.json',{cache:'no-store'}).then(r=>r.json()).then(render).catch(e=>{
+  document.getElementById('app').innerHTML='<p>Could not load parts.json: '+esc(e.message)+'</p>';
+});
+
+function render(data){
+  let html='';
+  for(const p of data.projects){
+    const parts=p.parts, total=parts.length;
+    const count=s=>parts.filter(x=>x.status===s).length;
+    const vol=s=>parts.filter(x=>!s||x.status===s).reduce((a,x)=>a+x.solid_cm3,0);
+    const allVol=vol();
+    const grams=parts.reduce((a,x)=>a+(Number(x.grams)||0),0);
+    const pctDone=Math.round(100*vol('done')/allVol);
+    const bar=['done','printing','failed'].map(s=>`<i style="width:${100*vol(s)/allVol}%;background:${COLORS[s]}"></i>`).join('');
+
+    html+=`<h1>${esc(p.title)}</h1><p class="sub">${esc(p.subtitle)}</p>
+    <div class="stats">
+      <div class="stat"><b>${pctDone}%</b><span>done (weighted by part size)</span></div>
+      <div class="stat"><b>${count('done')} / ${total}</b><span>parts finished</span></div>
+      <div class="stat"><b>${count('printing')}</b><span>on the printer</span></div>
+      <div class="stat"><b>${grams?grams.toLocaleString()+' g':'–'}</b><span>filament used so far</span></div>
+    </div>
+    <div class="bar">${bar}</div>
+    <div class="legend">${Object.keys(LABEL).map(s=>`<span><span class="dot" style="background:${COLORS[s]}"></span>${LABEL[s]} (${count(s)})</span>`).join('')}</div>
+    ${p.settings?`<div class="settings"><b>Slicer settings:</b> ${esc(p.settings)}</div>`:''}`;
+
+    const groups=[...new Set(parts.map(x=>x.group))];
+    for(const g of groups){
+      const gp=parts.filter(x=>x.group===g);
+      const gd=gp.filter(x=>x.status==='done').length;
+      html+=`<h2>${esc(g)} <small>${gd}/${gp.length} done</small></h2>
+      <table><thead><tr><th>Part</th><th>Status</th><th class="hide-sm">Size (mm)</th><th>Grams</th><th class="hide-sm">Notes</th></tr></thead><tbody>`;
+      for(const x of gp){
+        html+=`<tr><td>${esc(x.name.replace(/_/g,' '))}</td>
+        <td><span class="pill" style="background:${COLORS[x.status]||COLORS.todo}">${LABEL[x.status]||esc(x.status)}</span></td>
+        <td class="num hide-sm">${x.size_mm.join(' × ')}</td>
+        <td class="num">${x.grams??'–'}</td>
+        <td class="notes hide-sm">${esc(x.notes)}</td></tr>`;
+      }
+      html+='</tbody></table>';
+    }
+  }
+  html+=`<footer>Last updated ${esc(data.updated)}. To change a part, edit its <code>status</code> (todo, printing, done, failed), <code>grams</code> and <code>notes</code> in parts.json.</footer>`;
+  document.getElementById('app').innerHTML=html;
+}
+</script>
+</body>
+</html>

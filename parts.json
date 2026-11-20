@@ -1,0 +1,351 @@
+{
+  "updated": "2026-11-20",
+  "projects": [
+    {
+      "id": "camelot",
+      "title": "Camelot Game Master's Screen",
+      "subtitle": "Arthurian Tales prop, 32 mm, FDM",
+      "settings": "Lightning infill 5–10%, 2 wall loops, 3–4 top/bottom layers",
+      "parts": [
+        {
+          "name": "CentralWall_1",
+          "group": "Central wall",
+          "size_mm": [
+            105,
+            64,
+            95
+          ],
+          "solid_cm3": 353,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "CentralWall_2",
+          "group": "Central wall",
+          "size_mm": [
+            83,
+            93,
+            172
+          ],
+          "solid_cm3": 443,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "CentralWall_3",
+          "group": "Central wall",
+          "size_mm": [
+            75,
+            89,
+            163
+          ],
+          "solid_cm3": 652,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "CentralWall_4_1_F",
+          "group": "Central wall",
+          "size_mm": [
+            102,
+            11,
+            17
+          ],
+          "solid_cm3": 5,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "CentralWall_4_F",
+          "group": "Central wall",
+          "size_mm": [
+            106,
+            59,
+            164
+          ],
+          "solid_cm3": 293,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "CentralWall_5",
+          "group": "Central wall",
+          "size_mm": [
+            73,
+            88,
+            163
+          ],
+          "solid_cm3": 638,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "CentralWall_6",
+          "group": "Central wall",
+          "size_mm": [
+            81,
+            92,
+            172
+          ],
+          "solid_cm3": 437,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "ExternalDoor",
+          "group": "Doors, flags & shelves",
+          "size_mm": [
+            87,
+            12,
+            91
+          ],
+          "solid_cm3": 27,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "Flag_1",
+          "group": "Doors, flags & shelves",
+          "size_mm": [
+            28,
+            8,
+            5
+          ],
+          "solid_cm3": 1,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "Flag_2",
+          "group": "Doors, flags & shelves",
+          "size_mm": [
+            19,
+            5,
+            69
+          ],
+          "solid_cm3": 3,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "InnerWallDoor_1",
+          "group": "Doors, flags & shelves",
+          "size_mm": [
+            27,
+            9,
+            81
+          ],
+          "solid_cm3": 9,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "InnerWallDoor_2",
+          "group": "Doors, flags & shelves",
+          "size_mm": [
+            27,
+            9,
+            81
+          ],
+          "solid_cm3": 9,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "Pin",
+          "group": "Doors, flags & shelves",
+          "size_mm": [
+            30,
+            30,
+            14
+          ],
+          "solid_cm3": 4,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "RoundShelf3x",
+          "group": "Doors, flags & shelves",
+          "size_mm": [
+            72,
+            72,
+            8
+          ],
+          "solid_cm3": 26,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "SideWallLeft_1",
+          "group": "Left wing",
+          "size_mm": [
+            134,
+            107,
+            200
+          ],
+          "solid_cm3": 723,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "SideWallLeft_2",
+          "group": "Left wing",
+          "size_mm": [
+            153,
+            108,
+            145
+          ],
+          "solid_cm3": 541,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "SideWallLeft_3",
+          "group": "Left wing",
+          "size_mm": [
+            157,
+            100,
+            142
+          ],
+          "solid_cm3": 391,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "SideWallLeft_4",
+          "group": "Left wing",
+          "size_mm": [
+            167,
+            150,
+            185
+          ],
+          "solid_cm3": 777,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "SideWallLeft_5",
+          "group": "Left wing",
+          "size_mm": [
+            163,
+            208,
+            142
+          ],
+          "solid_cm3": 835,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "SideWallRight_1",
+          "group": "Right wing",
+          "size_mm": [
+            103,
+            103,
+            83
+          ],
+          "solid_cm3": 380,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "SideWallRight_2",
+          "group": "Right wing",
+          "size_mm": [
+            143,
+            117,
+            164
+          ],
+          "solid_cm3": 514,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "SideWallRight_3",
+          "group": "Right wing",
+          "size_mm": [
+            138,
+            120,
+            148
+          ],
+          "solid_cm3": 483,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "SideWallRight_4",
+          "group": "Right wing",
+          "size_mm": [
+            174,
+            115,
+            148
+          ],
+          "solid_cm3": 359,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "SideWallRight_5",
+          "group": "Right wing",
+          "size_mm": [
+            184,
+            133,
+            179
+          ],
+          "solid_cm3": 796,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "SquareShelf1",
+          "group": "Doors, flags & shelves",
+          "size_mm": [
+            76,
+            71,
+            8
+          ],
+          "solid_cm3": 21,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        },
+        {
+          "name": "SquareShelf2",
+          "group": "Doors, flags & shelves",
+          "size_mm": [
+            81,
+            75,
+            8
+          ],
+          "solid_cm3": 23,
+          "status": "todo",
+          "grams": null,
+          "notes": ""
+        }
+      ]
+    }
+  ]
+}
